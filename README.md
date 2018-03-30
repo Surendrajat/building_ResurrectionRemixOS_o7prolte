@@ -7,7 +7,7 @@
 	- `openjdk-8-jdk` is a **must have**, better clean `/usr/lib/jvm/` first
 - installing `repo` tool
 	```bash
-	mkdir ~/bin && curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo && chmod a+x ~/bin/repo
+	curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo && chmod a+x ~/bin/repo
 	```
 - setting up git credential
 	```bash
