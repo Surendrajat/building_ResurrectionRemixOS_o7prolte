@@ -25,7 +25,7 @@
 	```
 - syncing the ROM source
 	```bash
-	repo sync -c --no-tags --no-clone-bundle -f --force-sync -j8
+	repo sync -c --no-tags --no-clone-bundle -f --force-sync -j16
 	```
 	- -j*N*: *N* can be upto 2 * *No. of total CPU threads*
 
@@ -82,5 +82,6 @@
 	```
 - Building it!!!
 	```bash
-	make -j4 bacon
+	make -j16 bacon
 	```
+	- -j*N*: *N* can be upto 2 * *No. of total CPU threads*
