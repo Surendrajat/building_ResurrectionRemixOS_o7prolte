@@ -17,4 +17,5 @@ git config --global user.name "Surendrajat"
 repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b oreo --depth=1
 
 ####################### syncing the ROM source
-repo sync -c --no-tags --no-clone-bundle -f --force-sync -j8
+repo sync -c --no-tags --no-clone-bundle -f --force-sync -j16
+# -jN: N <= 2 * total CPU threads

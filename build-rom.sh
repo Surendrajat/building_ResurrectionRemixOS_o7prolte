@@ -23,6 +23,7 @@ lunch rr_o7prolte-eng
 
 ############################# start building
 make -j16 bacon
+# -jN: N <= 2 * total CPU threads
 
 ############################# upload rom
 curl --upload-file ./out/target/product/o7prolte/*.zip https://transfer.sh/rr_o7prolte-eng_sk.zip
