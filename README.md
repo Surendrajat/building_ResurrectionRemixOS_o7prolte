@@ -1,5 +1,5 @@
 # building_o7prolte_rr_rom
-## Sync-ing RR Source 	`./setup_and_sync.sh`
+## `./setup_and_sync.sh` (Sync-ing RR Source)
 - installing required packages
 	```bash
 	apt install openjdk-8-jdk android-tools-adb bc bison build-essential ccache curl flex g++-multilib gcc-multilib git-core gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev libc6-dev libesd0-dev libgl1-mesa-dev liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libwxgtk3.0-dev libx11-dev libxml2 libxml2-utils lzop maven ncftp pngcrush python-lunch rsync schedtool screen squashfs-tools tmux unzip w3m x11proto-core-dev xsltproc yasm zip zlib1g-dev
@@ -29,7 +29,7 @@
 	```
 	- -j*N*: *N* can be upto 2 * *No. of total CPU threads*
 
-## Cloning device tree, kernel, vendor etc. `./clone_device_tree.sh`
+## `./clone_device_tree.sh` (Cloning device tree, kernel, vendor etc.)
 - Cloning the device tree
 	```bash
 	git clone git@github.com:LineageOS/android_hardware_samsung.git hardware/samsung
@@ -53,7 +53,7 @@
 	./update_device_tree.sh
 	```
 
-## Building the ROM `./build_the_rom.sh`
+## `./build_the_rom.sh` (Building the ROM )
 - Enabling 50GB CACHE
 	```bash
 	export USE_CCACHE=1
@@ -74,7 +74,7 @@
 	```bash
 	lunch rr_o7prolte-eng
 	```
- - OutOfMemory in machine with RAM < 16GB [solution](http://www.2net.co.uk/blog/jack-server.html)
+ - OutOfMemoryError in machine with RAM < 16GB [solution](http://www.2net.co.uk/blog/jack-server.html)
 	 ```bash
 	export JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4g"
 	./prebuilts/sdk/tools/jack-admin kill-server
