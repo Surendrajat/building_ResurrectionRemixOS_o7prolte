@@ -1,4 +1,5 @@
-## Sync-ed RR ROM Source 	`./sync-rr-source.sh`
+# building_o7prolte_rr_rom
+## Sync-ing RR Source 	`./sync-rr-source.sh`
 - installing required packages
 	```bash
 	apt install openjdk-8-jdk android-tools-adb bc bison build-essential ccache curl flex g++-multilib gcc-multilib git-core gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev libc6-dev libesd0-dev libgl1-mesa-dev liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libwxgtk3.0-dev libx11-dev libxml2 libxml2-utils lzop maven ncftp pngcrush python-lunch rsync schedtool screen squashfs-tools tmux unzip w3m x11proto-core-dev xsltproc yasm zip zlib1g-dev
@@ -28,7 +29,7 @@
 	```
 	- -j*N*: *N* can be upto 2 * *No. of total CPU threads*
 
-## Cloned device tree, kernel, vendor etc. `./clone_dev_tree.sh`
+## Cloning device tree, kernel, vendor etc. `./clone_dev_tree.sh`
 - Cloning the device tree
 	```bash
 	git clone git@github.com:LineageOS/android_hardware_samsung.git hardware/samsung
