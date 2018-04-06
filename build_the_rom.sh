@@ -14,7 +14,7 @@ make clobber  #deletes all the object files AND the intermediate dependency file
 . build/envsetup.sh
 
 ####### Choose the target
-lunch rr_o7prolte-eng
+lunch rr_o7prolte-userdebug
 
 ####### OutOfMemory in machine with RAM < 16GB solution
 # export JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4g"
@@ -26,4 +26,4 @@ make -j16 bacon
 # -jN: N <= 2 * total CPU threads
 
 ####### upload rom
-curl --upload-file ./out/target/product/o7prolte/*.zip https://transfer.sh/rr_o7prolte-eng_sk.zip
+curl --upload-file ./out/target/product/o7prolte/*.zip https://transfer.sh/$(ls ./out/target/product/o7prolte/ | grep .zip)
