@@ -22,7 +22,7 @@ lunch rr_o7prolte-userdebug
 # ./prebuilts/sdk/tools/jack-admin start-server
 
 ####### start building
-make -j16 bacon
+make -j12 bacon
 # -jN: N <= 2 * total CPU threads
 
 ####### upload rom

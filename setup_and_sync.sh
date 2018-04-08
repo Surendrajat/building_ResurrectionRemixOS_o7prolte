@@ -1,9 +1,18 @@
 #!/bin/bash
 
+######### installing apt-fast
+sudo add-apt-repository ppa:apt-fast/stable
+sudo apt-get update
+sudo apt-get -y install apt-fast
+
+######### upgrading the system
+sudo apt-fast upgrade
+
 ####### installing required packages
-apt install openjdk-8-jdk android-tools-adb bc bison build-essential ccache curl flex g++-multilib gcc-multilib git-core gnupg gperf htop imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev libc6-dev libcurl4-openssl-dev libesd0-dev libgl1-mesa-dev liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libwxgtk3.0-dev libx11-dev libxml2 libxml2-utils lzop maven ncftp nss-updatedb pngcrush python-lunch rsync schedtool screen squashfs-tools tmux unzip w3m x11proto-core-dev xsltproc yasm zip zlib1g-dev
+sudo apt-fast install openjdk-8-jdk android-tools-adb bc bison build-essential ccache curl flex g++-multilib gcc-multilib git-core gnupg gperf htop imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev libc6-dev libcurl4-openssl-dev libesd0-dev libgl1-mesa-dev liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libwxgtk3.0-dev libx11-dev libxml2 libxml2-utils lzop maven ncftp nss-updatedb pngcrush python-lunch rsync schedtool screen squashfs-tools tmux unzip w3m x11proto-core-dev xsltproc yasm zip zlib1g-dev
 
 ####### installing repo tool
+mkdir ~/bin
 curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo && chmod a+x ~/bin/repo
 
 ####### creating RR dir
@@ -17,5 +26,5 @@ git config --global user.name "Surendrajat"
 repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b oreo --depth=1
 
 ####### syncing the ROM source
-repo sync -c --no-tags --no-clone-bundle -f --force-sync -j16
+repo sync -c --no-tags --no-clone-bundle -f --force-sync -j12
 # -jN: N <= 2 * total CPU threads
