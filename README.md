@@ -1,8 +1,8 @@
 # building_o7prolte_rr_rom
 ## ROM & Environment details:
-- OS: Resurrection Remix 6.0
-- Android version: 8.1.0 Oreo
-- Host OS: Ubuntu 16.04 (x86_64)
+- OS: `Resurrection Remix 6.0`
+- Android version: `8.1.0 Oreo`
+- Host OS: `Ubuntu 16.04 (x86_64)`
 
 ## `./setup_and_sync.sh` (Sync-ing RR Source)
 - installing required packages
@@ -49,7 +49,7 @@
 	make clean	#deletes all the object files created
 	# OR
 	make clobber  #deletes all the object files AND the intermediate dependency files generated which specify the dependencies of the cpp files.
-	#		OR
+	# OR
 	make installclean #cleans recently built installation files only (useful for recompilation)
 	```
 - Setting up build environment
