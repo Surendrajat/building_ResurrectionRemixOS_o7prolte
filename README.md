@@ -1,13 +1,18 @@
 # building_o7prolte_rr_rom
+## ROM & Environment details:
+- OS: Resurrection Remix 6.0
+- Android version: 8.1.0 Oreo
+- Host OS: Ubuntu 16.04 (x86_64)
+
 ## `./setup_and_sync.sh` (Sync-ing RR Source)
 - installing required packages
 	```bash
 	sudo apt install openjdk-8-jdk android-tools-adb bc bison build-essential ccache curl flex g++-multilib gcc-multilib git-core gnupg gperf htop imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev libc6-dev libcurl4-openssl-dev libesd0-dev libgl1-mesa-dev liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libwxgtk3.0-dev libx11-dev libxml2 libxml2-utils lzop maven ncftp nss-updatedb pngcrush python-lunch rsync schedtool screen squashfs-tools tmux unzip w3m x11proto-core-dev xsltproc yasm zip zlib1g-dev
 	```
-	- `openjdk-8-jdk` is a **must have**, better clean `/usr/lib/jvm/` first
+	- `openjdk-8-jdk` is a **must have**, better remove `oracle-jdk8` from `/usr/lib/jvm/` first(if exists)
 - installing `repo` tool
 	```bash
-	curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo && chmod a+x ~/bin/repo
+	mkdir ~/bin && curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo && chmod a+x ~/bin/repo
 	```
 - setting up git credential
 	```bash
@@ -18,41 +23,19 @@
 	```bash
 	mkdir ~/RR && cd ~/RR/
 	```
-	- Note: **-** in dir name isn't good for building, remove it
 - Initializing **RR** repo and downloading the manifest
 	```bash
 	repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b oreo --depth=1
+	```
+- Cloning local manifest (device tree, kernel source, vendor blobs etc.)
+	```bash
+	cd .repo && git clone https://github.com/on7/local_manifests && rm local_manifests/aex-oreo.xml && cd ..
 	```
 - syncing the ROM source
 	```bash
 	repo sync -c --no-tags --no-clone-bundle -f --force-sync -j16
 	```
 	- -j*N*: *N* can be upto 2 * *No. of total CPU threads*
-
-## `./clone_device_tree.sh` (Cloning device tree, kernel, vendor etc.)
-- Cloning the device tree
-	```bash
-	git clone https://github.com/LineageOS/android_hardware_samsung.git hardware/samsung
-	git clone https://github.com/LineageOS/android_device_qcom_common.git device/qcom/common
-	git clone https://github.com/LineageOS/android_device_samsung_qcom-common.git device/samsung/qcom-common
-	git clone https://github.com/LineageOS/android_packages_resources_devicesettings.git packages/resources/devicesettings
-	git clone https://github.com/LineageOS/android_external_sony_boringssl-compat.git external/sony/boringssl-compat
-
-	rm -rf vendor/qcom/opensource/dataservices
-	git clone https://github.com/Galaxy-MSM8916/android_vendor_qcom_opensource_dataservices vendor/qcom/opensource/dataservices
-	rm -rf hardware/qcom/audio-caf/msm8916
-	git clone https://github.com/Galaxy-MSM8916/android_hardware_qcom_audio hardware/qcom/audio-caf/msm8916
-
-	git clone https://github.com/on7pro/android_kernel_samsung_msm8916 kernel/samsung/msm8916
-	git clone https://github.com/on7pro/android_device_samsung_msm8916-common device/samsung/msm8916-common
-	git clone https://github.com/on7pro/android_device_samsung_o7-common device/samsung/o7-common
-	git clone https://github.com/on7pro/android_device_samsung_o7prolte device/samsung/o7prolte
-	git clone https://github.com/on7pro/android_vendor_samsung vendor/samsung
-	```
-- Updating the device tree (only if remote tree is updated)
-	```bash
-	./update_device_tree.sh
-	```
 
 ## `./build_the_rom.sh` (Building the ROM )
 - Enabling 50GB CACHE
@@ -66,14 +49,16 @@
 	make clean	#deletes all the object files created
 	# OR
 	make clobber  #deletes all the object files AND the intermediate dependency files generated which specify the dependencies of the cpp files.
+	#		OR
+	make installclean #cleans recently built installation files only (useful for recompilation)
 	```
-- Setting up environment variables
+- Setting up build environment
 	```bash
 	. build/envsetup.sh
 	```
 - Choosing the target
 	```bash
-	lunch rr_o7prolte-eng
+	lunch rr_o7prolte-userdebug
 	```
  - OutOfMemoryError in machine with RAM < 16GB [solution](http://www.2net.co.uk/blog/jack-server.html)
 	 ```bash

@@ -6,11 +6,16 @@ export CCACHE_DIR=~/RR/.ccache
 ./prebuilts/misc/linux-x86/ccache/ccache -M 50G
 
 ####### clean previous builds (if any)
-#make clean	#deletes all the object files created
+#make clean	 #deletes all the object files created
 #		 OR
-make clobber  #deletes all the object files AND the intermediate dependency files generated which specify the dependencies of the cpp files.
+#make clobber  #deletes all the object files AND the intermediate dependency files generated which specify the dependencies of the cpp files.
+#		OR
+make installclean  #cleans recently built installation files only (useful for recompilation)
 
-####### Setting up environment variables
+# export USER=Surendrajat
+# export HOST=ipc
+
+####### Setting up build environment
 . build/envsetup.sh
 
 ####### Choose the target
@@ -22,7 +27,7 @@ lunch rr_o7prolte-userdebug
 # ./prebuilts/sdk/tools/jack-admin start-server
 
 ####### start building
-make -j12 bacon
+make -j16 bacon
 # -jN: N <= 2 * total CPU threads
 
 ####### upload rom
