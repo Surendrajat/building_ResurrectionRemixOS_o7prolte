@@ -16,7 +16,13 @@ make installclean  #cleans recently built installation files only (useful for re
 # export HOST=ipc
 
 ####### Setting up build environment
-. build/envsetup.sh
+# autofill:
+# 2	{build-type: Unofficial}
+# 0	{changelog: 0 days}
+. build/envsetup.sh <<DONE
+2
+0
+DONE
 
 ####### Choose the target
 lunch rr_o7prolte-userdebug
