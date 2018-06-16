@@ -1,8 +1,7 @@
-# building_o7prolte_rr_rom
 ## ROM & Environment details:
-- OS: `Resurrection Remix 6.0`
+- OS: `Resurrection Remix 6.1.0`
 - Android version: `8.1.0 Oreo`
-- Host OS: `Ubuntu 16.04 (x86_64)`
+- Host OS: `Ubuntu 16.04+ (x86_64)`
 
 ## `./setup_and_sync.sh` (Sync-ing RR Source)
 - installing required packages
