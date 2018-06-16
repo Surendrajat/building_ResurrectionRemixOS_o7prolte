@@ -3,6 +3,9 @@
 ######### installing apt-fast
 sudo add-apt-repository -y ppa:apt-fast/stable
 sudo apt-get -y update
+echo debconf apt-fast/maxdownloads string 20 | sudo debconf-set-selections
+echo debconf apt-fast/dlflag boolean true | sudo debconf-set-selections
+echo debconf apt-fast/aptmanager string apt-get | sudo debconf-set-selections
 sudo apt-get -y install apt-fast
 
 ######### upgrading the system
