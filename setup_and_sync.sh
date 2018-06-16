@@ -24,7 +24,7 @@ git config --global user.email "sk2812283@gmail.com" && git config --global user
 mkdir ~/RR && cd ~/RR/
 
 ####### Initializing RR repo and downloading the manifest
-repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b oreo --depth=1
+yes | repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b oreo --depth=1
 
 ####### cloning local manifest
 cd .repo && git clone https://github.com/on7/local_manifests && rm local_manifests/aex-oreo.xml && cd ..
