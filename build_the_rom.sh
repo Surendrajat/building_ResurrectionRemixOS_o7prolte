@@ -31,4 +31,4 @@ make -j16 bacon
 # -jN: N <= 2 * total CPU threads
 
 ####### upload rom
-curl --upload-file ./out/target/product/o7prolte/*.zip https://transfer.sh/$(ls ./out/target/product/o7prolte/ | grep .zip)
+curl --upload-file ./out/target/product/o7prolte/*.zip https://transfer.sh/$(ls ./out/target/product/o7prolte/ | grep -m1 .zip)
