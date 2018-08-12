@@ -17,10 +17,10 @@ make installclean  #cleans recently built installation files only (useful for re
 
 ####### Setting up build environment
 # autofill:
-# 2	{build-type: Unofficial}
+# 1	{build-type: Unofficial}
 # 0	{changelog: 0 days}
 . build/envsetup.sh <<DONE
-2
+1
 0
 DONE
 
