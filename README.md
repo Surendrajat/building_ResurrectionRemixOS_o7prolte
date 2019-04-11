@@ -1,6 +1,6 @@
 ### **`ROM & Environment details`**
-- OS: **`Resurrection Remix 6.1.0`**
-- Android version: **`8.1.0 Oreo`**
+- OS: **`Resurrection Remix 7.0.1`**
+- Android version: **`9.0 Pie`**
 - Host OS: **`Ubuntu 16.04+`**
 
 ### **`Setup env & Sync ROM Source`**
@@ -24,11 +24,11 @@
 	```
 - Initialize **`repo`** in **`RR`** dir with **`default manifest`**
 	```bash
-	yes | repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b oreo --depth=1
+	yes | repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b pie --depth=1
 	```
 - Clone **`local manifest`** (device tree, kernel source, vendor blobs etc.)
 	```bash
-	cd .repo && git clone https://github.com/on7/local_manifests && rm local_manifests/aex-oreo.xml && cd ..
+	cd .repo && git clone https://github.com/on7/local_manifests && cd ..
 	```
 - Sync the **`ROM Source`**
 	```bash
