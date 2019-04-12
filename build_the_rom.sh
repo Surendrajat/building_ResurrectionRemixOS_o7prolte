@@ -27,11 +27,6 @@ DONE
 ####### Choose the target
 lunch rr_o7prolte-userdebug
 
-####### OutOfMemory in machine with RAM < 16GB solution
-# export JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4g"
-# ./prebuilts/sdk/tools/jack-admin kill-server
-# ./prebuilts/sdk/tools/jack-admin start-server
-
 ####### start building
 make -j16 bacon
 # -jN: N <= 2 * total CPU threads

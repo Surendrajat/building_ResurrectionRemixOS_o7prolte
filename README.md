@@ -59,12 +59,6 @@
 	```bash
 	lunch rr_o7prolte-userdebug
 	```
- - For RAM < 16GB (**`Jack-server OutOfMemoryError`** [**`solution`**](http://www.2net.co.uk/blog/jack-server.html))
-	 ```bash
-	export JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4g"
-	./prebuilts/sdk/tools/jack-admin kill-server
-	./prebuilts/sdk/tools/jack-admin start-server
-	```
 - Finally build it!!!
 	```bash
 	make -j16 bacon
