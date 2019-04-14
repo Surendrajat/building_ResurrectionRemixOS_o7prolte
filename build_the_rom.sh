@@ -12,8 +12,9 @@ export CCACHE_DIR=~/RR/.ccache
 #		OR
 make installclean  #cleans recently built installation files only (useful for recompilation)
 
-# export USER=Surendrajat
-# export HOST=ipc
+####### Limiting Java heap allocation for low physical memory (RAM)
+#for example you've 4GB of RAM put 3GB limit for JAVA processes
+#export _JAVA_OPTIONS="-Xmx3g"
 
 ####### Setting up build environment
 # autofill:

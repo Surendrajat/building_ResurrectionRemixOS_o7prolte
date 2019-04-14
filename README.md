@@ -62,3 +62,9 @@
 	```bash
 	make -j16 bacon
 	```
+### **`Troubleshooting`**
+- `java.lang.OutOfMemoryError` : Set `_JAVA_OPTIONS` with lower value than your physical memory (RAM)
+	```bash
+	#for example you've 4GB of RAM put 3GB limit for JAVA processes
+	export _JAVA_OPTIONS="-Xmx3g"
+	```
