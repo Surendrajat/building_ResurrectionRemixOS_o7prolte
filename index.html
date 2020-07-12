@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Building resurrectionremixos o7prolte by Surendrajat</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Building resurrectionremixos o7prolte</h1>
+        <h2>A guide to build RR OS for o7prolte</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/Surendrajat/building_ResurrectionRemixOS_o7prolte/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/Surendrajat/building_ResurrectionRemixOS_o7prolte/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/Surendrajat/building_ResurrectionRemixOS_o7prolte" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h3>
+<a id="rom--environment-details" class="anchor" href="#rom--environment-details" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong><code>ROM &amp; Environment details</code></strong>
+</h3>
+<ul>
+<li>OS: <strong><code>Resurrection Remix 7.0.1</code></strong>
+</li>
+<li>Android version: <strong><code>9.0 Pie</code></strong>
+</li>
+<li>Host OS: <strong><code>Ubuntu 16.04+</code></strong>
+</li>
+</ul>
+<h3>
+<a id="setup-env--sync-rom-source" class="anchor" href="#setup-env--sync-rom-source" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong><code>Setup env &amp; Sync ROM Source</code></strong>
+</h3>
+<ul>
+<li>Install required packages
+<div class="highlight highlight-source-shell"><pre> sudo apt install android-tools-adb bc bison build-essential ccache curl flex g++-multilib gcc-multilib git-core gnupg gperf htop imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev libc6-dev libcurl4-openssl-dev libesd0-dev libgl1-mesa-dev liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libwxgtk3.0-dev libx11-dev libxml2 libxml2-utils lzop maven ncftp nss-updatedb pngcrush python-lunch rsync schedtool screen squashfs-tools tmux unzip w3m x11proto-core-dev xsltproc yasm zip zlib1g-dev</pre></div>
+</li>
+<li>Install <strong><code>repo</code></strong> tool
+<div class="highlight highlight-source-shell"><pre> mkdir <span class="pl-k">~</span>/bin <span class="pl-k">&amp;&amp;</span> curl http://commondatastorage.googleapis.com/git-repo-downloads/repo <span class="pl-k">&gt;</span> <span class="pl-k">~</span>/bin/repo <span class="pl-k">&amp;&amp;</span> chmod a+x <span class="pl-k">~</span>/bin/repo</pre></div>
+</li>
+<li>Setup <strong><code>git credential</code></strong>
+<div class="highlight highlight-source-shell"><pre> git config --global user.email <span class="pl-s"><span class="pl-pds">"</span>your-email-address<span class="pl-pds">"</span></span>
+ git config --global user.name <span class="pl-s"><span class="pl-pds">"</span>your-git-username<span class="pl-pds">"</span></span></pre></div>
+</li>
+<li>Create new <strong><code>RR</code></strong> dir
+<div class="highlight highlight-source-shell"><pre> mkdir <span class="pl-k">~</span>/RR <span class="pl-k">&amp;&amp;</span> <span class="pl-c1">cd</span> <span class="pl-k">~</span>/RR/</pre></div>
+</li>
+<li>Initialize <strong><code>repo</code></strong> in <strong><code>RR</code></strong> dir with <strong><code>default manifest</code></strong>
+<div class="highlight highlight-source-shell"><pre> yes <span class="pl-k">|</span> repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b pie --depth=1</pre></div>
+</li>
+<li>Clone <strong><code>local manifest</code></strong> (device tree, kernel source, vendor blobs etc.)
+<div class="highlight highlight-source-shell"><pre> <span class="pl-c1">cd</span> .repo <span class="pl-k">&amp;&amp;</span> git clone https://github.com/on7/local_manifests <span class="pl-k">&amp;&amp;</span> <span class="pl-c1">cd</span> ..</pre></div>
+</li>
+<li>Sync the <strong><code>ROM Source</code></strong>
+<div class="highlight highlight-source-shell"><pre> repo sync -c --no-tags --no-clone-bundle -f --force-sync -j16</pre></div>
+<ul>
+<li>
+<code>-jN</code>: <code>N</code> &lt;= <code>2 * No. of total CPU threads</code>
+</li>
+</ul>
+</li>
+</ul>
+<h3>
+<a id="build-the-rom" class="anchor" href="#build-the-rom" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong><code>Build the ROM</code></strong>
+</h3>
+<ul>
+<li>Enable <strong><code>50GB</code></strong> <strong><code>CACHE</code></strong>
+<div class="highlight highlight-source-shell"><pre> <span class="pl-k">export</span> USE_CCACHE=1
+ <span class="pl-k">export</span> CCACHE_DIR=<span class="pl-k">~</span>/RR/.ccache
+ ./prebuilts/misc/linux-x86/ccache/ccache -M 50G</pre></div>
+</li>
+<li>Clean previous builds (if any)
+<div class="highlight highlight-source-shell"><pre> make clean			<span class="pl-c"><span class="pl-c">#</span>deletes all the object files created</span>
+ <span class="pl-c"><span class="pl-c">#</span> OR</span>
+ make clobber  		<span class="pl-c"><span class="pl-c">#</span>deletes all the object files AND the intermediate dependency files generated</span>
+ <span class="pl-c"><span class="pl-c">#</span> OR</span>
+ make installclean   <span class="pl-c"><span class="pl-c">#</span>cleans recently built installation files only(useful for quick recompilation)</span></pre></div>
+</li>
+<li>Setup build environment
+<div class="highlight highlight-source-shell"><pre> <span class="pl-c1">.</span> build/envsetup.sh</pre></div>
+</li>
+<li>Choose the build target
+<div class="highlight highlight-source-shell"><pre> lunch rr_o7prolte-userdebug</pre></div>
+</li>
+<li>Finally build it!!!
+<div class="highlight highlight-source-shell"><pre> make -j16 bacon</pre></div>
+</li>
+</ul>
+<h3>
+<a id="troubleshooting" class="anchor" href="#troubleshooting" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong><code>Troubleshooting</code></strong>
+</h3>
+<ul>
+<li>
+<code>java.lang.OutOfMemoryError</code> : Set <code>_JAVA_OPTIONS</code> with lower value than your physical memory (RAM)
+<div class="highlight highlight-source-shell"><pre> <span class="pl-c"><span class="pl-c">#</span>for example you've 4GB of RAM put 3GB limit for JAVA processes</span>
+ <span class="pl-k">export</span> _JAVA_OPTIONS=<span class="pl-s"><span class="pl-pds">"</span>-Xmx3g<span class="pl-pds">"</span></span></pre></div>
+</li>
+</ul>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
